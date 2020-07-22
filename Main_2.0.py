@@ -147,6 +147,47 @@ z01_Request_Fields = {
 
 }
 
+Terminal_Diagnostics_Dict = {
+    # Terminal_Diagnostics
+    "Number_Dial_Attempts": 1,
+    "Terminal_Reason_Code": 2,
+    "Host_Dialed": 1,
+}
+
+Terminal_Diagnostics_Plus_Dict = {
+    # Terminal_Diagnostics_Plus
+    "Number_Dial_Attempts": 1,
+    "Terminal_Reason_Code": 2,
+    "Host_Dialed": 1,
+    "Folio_Area_Tag": 2,
+    "Purchase_ID_Format_Code": 1,
+    "Reserved_2": 39,
+    "Field_Separator_2": 1,
+    "AVS_Area_Tag": 2,
+    "AVS_Information": 0,
+    "Field_Separator_3": 1,
+    "Variable_Data_Area_Tag": 2,
+}
+
+Discretionary_Data_Dict = {
+    # Discretionary_Data
+    "Client_Discretionary_Data": 0,
+    "Field_Separator": 1,
+    "Field_Separator_Holder": 1,
+}
+
+Addendum_Tag_Data_Dict = {
+    # Addendum_Tag_Data
+    "Field_Separator_2": 1,
+    "Addendum_Data_Length": 4,
+    "Number_Tag_IDs": 2,
+    "Tag_ID": 3,
+    "Tag_Data_Length": 4,
+    "Tag_Data": 0,
+    "Field_Separator_Holder_2": 1,
+}
+
+
 z01_Request_Field = {
     "Standard_Map_Data": {
         "Company_Identifier": 4,
@@ -166,6 +207,8 @@ z01_Request_Field = {
         "Field_Sep_Track2": 1,
         "Exp_Date_Track2:": 4,
         "Disc_Data_Track2": 0,  # Variable_Length
+        "Card_Use_Type": 1,  # Adding these to standard map to reduce replication
+        "Total_Amount": 7,  # Adding these to standard map to reduce replication
     },
     "01_C2": {
         # In the stupid Z01 Spec this map has duplicated standard map with random twists?
@@ -196,35 +239,23 @@ z01_Request_Field = {
         "Access_Code": 4,
         "Term_Reference_Number": 12,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "01_D3": {
         # Starts with Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "KSN": 16,
         "Pin_Block": 16,
         "Cash_Back_Amount": 6,
         "Convenience_Fee_Amount": 6,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "01_D4": {
         # Starts with standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "KSN": 16,
         "Pin_Block": 16,
         "Cash_Back_Amount": 6,
@@ -235,43 +266,25 @@ z01_Request_Field = {
         "Reserved": 20,
         "Addendum_Presence_Ind": 1,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
         # Addendum_Tag_Data
-        "Field_Separator_2": 1,
-        "Addendum_Data_Length": 4,
-        "Number_Tag_IDs": 2,
-        "Tag_ID": 3,
-        "Tag_Data_Length": 4,
-        "Tag_Data": 0,
-        "Field_Separator_Holder_2": 1,
+        "Addendum_Tag_Data": 0,
     },
     "03_C1": {
         # Starts with standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Currency_Code": 3,
         "Terminal_Type": 1,
         "Authorization_Number": 6,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "03_C2": {
         # Another weird ass map
         # Uses Standard map -Unique Dev ID
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Currency_Code": 3,
         # Specific Information
         "Authorization_Number": 6,
@@ -284,34 +297,22 @@ z01_Request_Field = {
         "Retrieval_Ref_Num": 12,
         "Term_Reference_Number": 12,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "03_D0": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Cash_Back_Amount": 6,
         "Convenience_Fee_Amount": 6,
         "Reserved": 8,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     # Uses Standard Map
     "05_B2": {
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "CVV2_Indicator": 1,
         "CVV2": 4,
         "Moto_Indicator": 1,
@@ -327,9 +328,7 @@ z01_Request_Field = {
         "Reserved_2": 33,
         "Addendum_Presence_Indicator": 1,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # End of Term Diagnostics
         "Reserved_3": 19,
         "AVS_Area_Tag": 2,
@@ -337,30 +336,18 @@ z01_Request_Field = {
         "Field Separator": 1,
         "Variable_Data_Area_Tag": 2,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
-        # Addendum Tag Data
-        "Field_Separator_2": 1,
-        "Addendum_Data_Length": 4,
-        "Number_Tag_IDs": 2,
-        "Tag_ID": 3,
-        "Tag_Data_Length": 4,
-        "Tag_Data": 0,
-        "Field_Separator_Holder_2": 1,
+        "Discretionary_Data": 0,
+        # Addendum_Tag_Data
+        "Addendum_Tag_Data": 0,
     },
     "05_F0": {
         # Starts with standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Terminal_Type": 1,
         "Settlement_Indicator": 1,
         "Filler": 1,
         "Good_Sold": 1,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # End of Terminal Diagnostics
         "Folio_Area_Tag": 2,
         "Purch_ID_Format_Code": 1,
@@ -373,14 +360,10 @@ z01_Request_Field = {
         "Field Separator": 1,
         "Variable_Data_Area_Tag": 2,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator_3": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "05_F2": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "CVV2_Indicator": 1,
         "CVV2": 4,
         "Moto_Indicator": 1,
@@ -388,9 +371,7 @@ z01_Request_Field = {
         "Settlement_Indicator": 1,
         "Filler": 1,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # End of Terminal Diagnostics
         "Folio_Area_Tag": 2,
         "Purch_ID_Format_Code": 1,
@@ -403,14 +384,10 @@ z01_Request_Field = {
         "Field Separator": 1,
         "Variable_Data_Area_Tag": 2,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator_3": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "05_G2": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Tax_Amount": 6,
         "Customer_Code": 25,
         "PoS_Data_Codes": 12,
@@ -423,99 +400,58 @@ z01_Request_Field = {
         "Reserved_2": 32,
         "Addendum_Presence_Indicator": 1,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
-        # Addendum Tag Data
-        "Field_Separator_2": 1,
-        "Addendum_Data_Length": 4,
-        "Number_Tag_IDs": 2,
-        "Tag_ID": 3,
-        "Tag_Data_Length": 4,
-        "Tag_Data": 0,
-        "Field_Separator_Holder_2": 1,
+        "Discretionary_Data": 0,
+        # Addendum_Tag_Data
+        "Addendum_Tag_Data": 0,
     },
     "05_NT": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Terminal_Type": 1,
         "Settlement_Indicator": 1,
         "Reserved": 2,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "05_NO": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
+
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "05_N2": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Credit_Plan": 5,
         "Offered_Down_Payment": 7,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "05_N9": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Card_Type": 4,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "05_P0": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Tax_Amount": 6,
         "Customer_Code": 25,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "05_P5": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Terminal_Type": 1,
         "Odometer": 6,
         "Driver": 6,
@@ -544,19 +480,13 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "05_P6": {
         # Uses Standard Map
         # This map appears identical to the P5...?
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Terminal_Type": 1,
         "Odometer": 6,
         "Driver": 6,
@@ -585,18 +515,12 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "05_P7": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Terminal_Type": 1,
         "Odometer": 6,
         "Driver": 6,
@@ -620,18 +544,12 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "05_P8": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Terminal_Type": 1,
         "Odometer": 6,
         "Driver": 6,
@@ -668,26 +586,14 @@ z01_Request_Field = {
         "Reserved": 17,
         "Addendum_Presence_Indicator": 1,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
-        # Addendum Tag Data
-        "Field_Separator_2": 1,
-        "Addendum_Data_Length": 4,
-        "Number_Tag_IDs": 2,
-        "Tag_ID": 3,
-        "Tag_Data_Length": 4,
-        "Tag_Data": 0,
-        "Field_Separator_Holder_2": 1,
+        "Discretionary_Data": 0,
+        # Addendum_Tag_Data
+        "Addendum_Tag_Data": 0,
     },
     "05_W7": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Terminal_Type": 1,
         "Fuel_Service_Type": 2,
         "Prompt_Data": 43,
@@ -714,26 +620,14 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
-        # Addendum Tag Data
-        "Field_Separator_2": 1,
-        "Addendum_Data_Length": 4,
-        "Number_Tag_IDs": 2,
-        "Tag_ID": 3,
-        "Tag_Data_Length": 4,
-        "Tag_Data": 0,
-        "Field_Separator_Holder_2": 1,
+        "Discretionary_Data": 0,
+        # Addendum_Tag_Data
+        "Addendum_Tag_Data": 0,
     },
     "11_B2": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Terminal_Type": 1,
@@ -743,26 +637,14 @@ z01_Request_Field = {
         "Reserved": 66,
         "Addendum_Presence_Indicator": 1,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
-        # Addendum Tag Data
-        "Field_Separator_2": 1,
-        "Addendum_Data_Length": 4,
-        "Number_Tag_IDs": 2,
-        "Tag_ID": 3,
-        "Tag_Data_Length": 4,
-        "Tag_Data": 0,
-        "Field_Separator_Holder_2": 1,
+        "Discretionary_Data": 0,
+        # Addendum_Tag_Data
+        "Addendum_Tag_Data": 0,
     },
     "11_E3": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Currency_Code": 3,
         "EBT_Type": 2,
         "Terminal_Type": 1,
@@ -773,18 +655,12 @@ z01_Request_Field = {
         "Voucher_Number": 15,
         "Reserved": 10,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "11_G2": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Tax_Code": 6,
@@ -796,59 +672,35 @@ z01_Request_Field = {
         "Reserved": 65,
         "Addendum_Presence_Indicator": 1,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
-        # Addendum Tag Data
-        "Field_Separator_2": 1,
-        "Addendum_Data_Length": 4,
-        "Number_Tag_IDs": 2,
-        "Tag_ID": 3,
-        "Tag_Data_Length": 4,
-        "Tag_Data": 0,
-        "Field_Separator_Holder_2": 1,
+        "Discretionary_Data": 0,
+        # Addendum_Tag_Data
+        "Addendum_Tag_Data": 0,
     },
     "11_N8": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Terminal_Type": 1,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "11_P0": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Tax_Amount": 6,
         "Customer_Code": 25,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "11_P5": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Terminal_Type": 1,
@@ -879,19 +731,13 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "11_P6": {
         # Uses Standard Map
         # Again its the same as P5..?
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Terminal_Type": 1,
@@ -922,18 +768,12 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "11_P7": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Terminal_Type": 1,
@@ -960,18 +800,12 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "11_P8": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Terminal_Type": 1,
@@ -1009,26 +843,14 @@ z01_Request_Field = {
         "Reserved_2": 20,
         "Addendum_Presence_Indicator": 1,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
-        # Addendum Tag Data
-        "Field_Separator_2": 1,
-        "Addendum_Data_Length": 4,
-        "Number_Tag_IDs": 2,
-        "Tag_ID": 3,
-        "Tag_Data_Length": 4,
-        "Tag_Data": 0,
-        "Field_Separator_Holder_2": 1,
+        "Discretionary_Data": 0,
+        # Addendum_Tag_Data
+        "Addendum_Tag_Data": 0,
     },
     "11_W7": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Terminal_Type": 1,
@@ -1057,26 +879,14 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
-        # Addendum Tag Data
-        "Field_Separator_2": 1,
-        "Addendum_Data_Length": 4,
-        "Number_Tag_IDs": 2,
-        "Tag_ID": 3,
-        "Tag_Data_Length": 4,
-        "Tag_Data": 0,
-        "Field_Separator_Holder_2": 1,
+        "Discretionary_Data": 0,
+        # Addendum_Tag_Data
+        "Addendum_Tag_Data": 0,
     },
     "13_B2": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "CVV2_Indicator": 1,
         "CVV2": 4,
         "Moto_Indicator": 1,
@@ -1091,32 +901,21 @@ z01_Request_Field = {
         "Reserved": 3,
         "Addendum_Presence_Indicator": 1,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         "AVS_Area_Tag": 2,
         "AVS_Information": 0,
         "Field_Separator": 1,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator_2": 1,
-        "Field_Separator_Holder": 1,
-        # Addendum Tag Data
-        "Field_Separator_3": 1,
-        "Addendum_Data_Length": 4,
-        "Number_Tag_IDs": 2,
-        "Tag_ID": 3,
-        "Tag_Data_Length": 4,
-        "Tag_Data": 0,
-        "Field_Separator_Holder_2": 1,
+        "Discretionary_Data": 0,
+        # Addendum_Tag_Data
+        "Addendum_Tag_Data": 0,
     },
     "13_C2": {
         # Weird Fucking Map
         # Uses Standard - Unique ID
-        "Card_Use_Type": 1,
-        "Total_Amount:": 7,
+
         "Currency_Code": 3,
-        # Specific INformation
+        # Specific Information
         "Terminal_Type": 1,
         "Sale_Type": 1,
         "Card_Type": 4,
@@ -1127,36 +926,24 @@ z01_Request_Field = {
         "Usage_Code": 1,
         "Terminal_Reference_Number": 12,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator_2": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "13_D3": {
         # Starts with Standard Map
         # Same as 01 version..?
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "KSN": 16,
         "Pin_Block": 16,
         "Cash_Back_Amount": 6,
         "Convenience_Fee_Amount": 6,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "13_D4": {
         # Starts with standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "KSN": 16,
         "Pin_Block": 16,
         "Cash_Back_Amount": 6,
@@ -1166,26 +953,14 @@ z01_Request_Field = {
         "Reserved": 21,
         "Addendum_Presence_Ind": 1,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
         # Addendum_Tag_Data
-        "Field_Separator_2": 1,
-        "Addendum_Data_Length": 4,
-        "Number_Tag_IDs": 2,
-        "Tag_ID": 3,
-        "Tag_Data_Length": 4,
-        "Tag_Data": 0,
-        "Field_Separator_Holder_2": 1,
+        "Addendum_Tag_Data": 0,
     },
     "13_E3": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Currency_Code": 3,
         "EBT_Type": 2,
         "Terminal_Type": 1,
@@ -1196,69 +971,35 @@ z01_Request_Field = {
         "Convenience_Fee_Amount": 6,
         "Reserved": 25,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "13_F0": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Mail_Indicator": 1,
         "Terminal_Type": 1,
         "Reserved": 2,
-        # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
-        "Folio_Area_Tag": 2,
-        "Purchase_ID_Format_Code": 1,
-        "Reserved_2": 39,
-        "Field_Separator_2": 1,
-        "AVS_Area_Tag": 2,
-        "AVS_Information": 0,
-        "Field_Separator_3": 1,
-        "Variable_Data_Area_Tag": 2,
+        # Term Diagnostics Plus
+        "Terminal_Diagnostics_Plus": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "13_F2": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "CVV2_Presence_Indicator": 1,
         "CVV2": 4,
         "Moto_Indicator": 1,
         "Purchase_Type": 1,
         "Terminal_Type": 1,
         "Filler": 1,
-        # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
-        "Folio_Area_Tag": 2,
-        "Purchase_ID_Format_Code": 1,
-        "Reserved_2": 39,
-        "Field_Separator_2": 1,
-        "AVS_Area_Tag": 2,
-        "AVS_Information": 0,
-        "Field_Separator_3": 1,
-        "Variable_Data_Area_Tag": 2,
+        # Term Diagnostics Plus
+        "Terminal_Diagnostics_Plus": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "13_G2": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Tax_Amount": 6,
         "Customer_Code": 25,
         "Surcharge_Amount": 6,
@@ -1268,39 +1009,21 @@ z01_Request_Field = {
         "Reserved": 65,
         "Addendum_Presence_indicator": 1,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
         # Addendum_Tag_Data
-        "Field_Separator_2": 1,
-        "Addendum_Data_Length": 4,
-        "Number_Tag_IDs": 2,
-        "Tag_ID": 3,
-        "Tag_Data_Length": 4,
-        "Tag_Data": 0,
-        "Field_Separator_Holder_2": 1,
+        "Addendum_Tag_Data": 0,
     },
     "13_N0": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "13_N2": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Credit_Plan": 5,
         "Offered_Down_Payment": 7,
         "Product_Code_1": 4,
@@ -1310,33 +1033,21 @@ z01_Request_Field = {
         "Product_Code_5": 4,
         "Unused": 11,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "13_P0": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Tax_Code": 6,
         "Customer_Code": 25,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "13_P5": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Odometer": 6,
         "Driver": 6,
         "Control_Number": 4,
@@ -1364,18 +1075,12 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "13_P6": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Odometer": 6,
         "Driver": 6,
         "Control_Number": 4,
@@ -1403,18 +1108,12 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "13_P7": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Terminal_Type": 1,
         "Odometer": 6,
         "Driver": 6,
@@ -1439,18 +1138,12 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
     "13_P8": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Odometer": 6,
         "Driver": 6,
         "Control_Number": 4,
@@ -1485,26 +1178,14 @@ z01_Request_Field = {
         "Reserved": 20,
         "Addendum_Presence_Indicator": 1,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
         # Addendum_Tag_Data
-        "Field_Separator_2": 1,
-        "Addendum_Data_Length": 4,
-        "Number_Tag_IDs": 2,
-        "Tag_ID": 3,
-        "Tag_Data_Length": 4,
-        "Tag_Data": 0,
-        "Field_Separator_Holder_2": 1,
+        "Addendum_Tag_Data": 0,
     },
     "13_W7": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "Terminal_Type": 1,
         "Fuel_Service_Type": 2,
         "Prompt_Data": 43,
@@ -1530,26 +1211,15 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
         # Addendum Tag Data
-        "Field_Separator_2": 1,
-        "Addendum_Data_Length": 4,
-        "Number_Tag_IDs": 2,
-        "Tag_ID": 3,
-        "Tag_Data_Length": 4,
-        "Tag_Data": 0,
-        "Field_Separator_Holder_2": 1,
+        # Addendum_Tag_Data
+        "Addendum_Tag_Data": 0,
     },
     "30_B2": {
         # Uses Standard Map
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
         "PoS_Data_Codes": 12,
         "Mobile_Device_Indicator": 1,
         "Reserved": 1,
@@ -1557,21 +1227,11 @@ z01_Request_Field = {
         "Reserved_2": 40,
         "Addendum_Presence_Indicator": 1,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
-        # Addendum Tag Data
-        "Field_Separator_2": 1,
-        "Addendum_Data_Length": 4,
-        "Number_Tag_IDs": 2,
-        "Tag_ID": 3,
-        "Tag_Data_Length": 4,
-        "Tag_Data": 0,
-        "Field_Separator_Holder_2": 1,
+        "Discretionary_Data": 0,
+        # Addendum_Tag_Data
+        "Addendum_Tag_Data": 0,
     },
     "30_C2": {
         # In the stupid Z01 Spec this map has duplicated standard map with random twists?
@@ -1602,31 +1262,22 @@ z01_Request_Field = {
         "Access_Code": 4,
         "Term_Reference_Number": 12,
         # Term Diagnostics
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
+        "Terminal_Diagnostics": 0,
         # Client Disc Data
-        "Client_Discretionary_Data": 0,
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
+        "Discretionary_Data": 0,
     },
-    # Uses Standard Map
-    "Card_Use_Type": 1,
-    "Total_Amount": 7,
-    "Currency_Code": 3,
-    "EBT_Type": 2,
-    "Cash_Back_Amount": 6,
-    "Convenience_Fee_Amount": 6,
-    "Reserved": 10,
-    # Term Diagnostics
-    "Number_Dial_Attempts": 1,
-    "Terminal_Reason_Code": 2,
-    "Host_Dialed": 1,
-    # Client Disc Data
-    "Client_Discretionary_Data": 0,
-    "Field_Separator": 1,
-    "Field_Separator_Holder": 1,
-
+    "30_??": {
+        # Uses Standard Map
+        "Currency_Code": 3,
+        "EBT_Type": 2,
+        "Cash_Back_Amount": 6,
+        "Convenience_Fee_Amount": 6,
+        "Reserved": 10,
+        # Term Diagnostics
+        "Terminal_Diagnostics": 0,
+        # Client Disc Data
+        "Discretionary_Data": 0,
+    },
 }
 
 print("Enter string, press 'ctrl+d' when done to input")
