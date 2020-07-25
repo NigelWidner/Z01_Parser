@@ -187,48 +187,54 @@ Addendum_Tag_Data_Dict = {
     "Field_Separator_Holder_2": 1,
 }
 
+Standard_Map_Dict = {
+    "Company_Identifier": 4,
+    "Terminal_Class_ID": 1,
+    "Terminal_Format_Level": 2,
+    "Multiple_Inquiry_Flag": 1,
+    "Response_Format_Code": 2,
+    "Request_Format_Code": 2,
+    "Transaction_Type": 2,
+    "Sequence_Number": 6,
+    "Date": 6,
+    "Time": 4,
+    "Terminal_Location_ID": 15,  # Named Terminal_ID in spec's map info
+    "Company_ID": 4,
+    "Unique_Device_ID": 4,  # This is not always present
+    "Account_Number": 0,  # Variable Length
+    "Field_Sep_Track2": 1,
+    "Exp_Date_Track2:": 4,
+    "Disc_Data_Track2": 0,  # Variable_Length
+    "Card_Use_Type": 1,  # Adding these to standard map to reduce replication
+    "Total_Amount": 7,  # Adding these to standard map to reduce replication
+}
+
+Standard_Map_No_Unique_Dict = {
+    #Standard_Map_No_Unique
+    "Company_Identifier": 4,
+    "Terminal_Class_ID": 1,
+    "Terminal_Format_Level": 2,
+    "Multiple_Inquiry_Flag": 1,
+    "Response_Format_Code": 2,
+    "Request_Format_Code": 2,
+    "Transaction_Type": 2,
+    "Sequence_Number": 6,
+    "Date": 6,
+    "Time": 4,
+    "Terminal_Location_ID": 15,  # Named Terminal_ID in spec's map info
+    "Company_ID": 4,
+    "Account_Number": 0,  # Variable Length
+    "Field_Sep_Track2": 1,
+    "Exp_Date_Track2:": 4,
+    "Disc_Data_Track2": 0,  # Variable_Length
+    "Card_Use_Type": 1,  # Adding these to standard map to reduce replication
+    "Total_Amount": 7,  # Adding these to standard map to reduce replication
+}
+
 
 z01_Request_Field = {
-    "Standard_Map_Data": {
-        "Company_Identifier": 4,
-        "Terminal_Class_ID": 1,
-        "Terminal_Format_Level": 2,
-        "Multiple_Inquiry_Flag": 1,
-        "Response_Format_Code": 2,
-        "Request_Format_Code": 2,
-        "Transaction_Type": 2,
-        "Sequence_Number": 6,
-        "Date": 6,
-        "Time": 4,
-        "Terminal_Location_ID": 15,  # Named Terminal_ID in spec's map info
-        "Company_ID": 4,
-        "Unique_Device_ID": 4,  # This is not always present
-        "Account_Number": 0,  # Variable Length
-        "Field_Sep_Track2": 1,
-        "Exp_Date_Track2:": 4,
-        "Disc_Data_Track2": 0,  # Variable_Length
-        "Card_Use_Type": 1,  # Adding these to standard map to reduce replication
-        "Total_Amount": 7,  # Adding these to standard map to reduce replication
-    },
     "01_C2": {
-        # In the stupid Z01 Spec this map has duplicated standard map with random twists?
-        # This might need reword to use the standard map -Uniq Dev ID
-        "Company_Identifier": 4,
-        "Terminal_Class_ID": 1,
-        "Terminal_Format_Level": 2,
-        "Multiple_Inquiry_Flag": 1,
-        "Response_Format_Code": 2,
-        "Request_Format_Code": 2,
-        "Transaction_Type": 2,
-        "Sequence_Number": 6,
-        "Date": 6,
-        "Time": 4,
-        "Terminal_ID": 15,  # Named Terminal_ID in spec's map info
-        "Company_ID": 4,
-        # Detail Information
-        "Track_2_Data": 37,
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
+        "Standard_Map_No_Unique": 0,
         "Currency_Code": 3,
         # Specific Information
         "Terminal_Type": 1,
@@ -244,7 +250,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "01_D3": {
-        # Starts with Standard Map
+        "Standard_Map_Dict": 0,
         "KSN": 16,
         "Pin_Block": 16,
         "Cash_Back_Amount": 6,
@@ -255,7 +261,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "01_D4": {
-        # Starts with standard Map
+        "Standard_Map_Dict": 0,
         "KSN": 16,
         "Pin_Block": 16,
         "Cash_Back_Amount": 6,
@@ -273,7 +279,7 @@ z01_Request_Field = {
         "Addendum_Tag_Data": 0,
     },
     "03_C1": {
-        # Starts with standard Map
+        "Standard_Map_Dict": 0,
         "Currency_Code": 3,
         "Terminal_Type": 1,
         "Authorization_Number": 6,
@@ -283,8 +289,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "03_C2": {
-        # Another weird ass map
-        # Uses Standard map -Unique Dev ID
+        "Standard_Map_No_Unique": 0,
         "Currency_Code": 3,
         # Specific Information
         "Authorization_Number": 6,
@@ -302,7 +307,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "03_D0": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Cash_Back_Amount": 6,
         "Convenience_Fee_Amount": 6,
         "Reserved": 8,
@@ -311,8 +316,8 @@ z01_Request_Field = {
         # Client Disc Data
         "Discretionary_Data": 0,
     },
-    # Uses Standard Map
     "05_B2": {
+        "Standard_Map_Dict": 0,
         "CVV2_Indicator": 1,
         "CVV2": 4,
         "Moto_Indicator": 1,
@@ -341,7 +346,7 @@ z01_Request_Field = {
         "Addendum_Tag_Data": 0,
     },
     "05_F0": {
-        # Starts with standard Map
+        "Standard_Map_Dict": 0,
         "Terminal_Type": 1,
         "Settlement_Indicator": 1,
         "Filler": 1,
@@ -363,7 +368,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "05_F2": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "CVV2_Indicator": 1,
         "CVV2": 4,
         "Moto_Indicator": 1,
@@ -387,7 +392,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "05_G2": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Tax_Amount": 6,
         "Customer_Code": 25,
         "PoS_Data_Codes": 12,
@@ -407,7 +412,7 @@ z01_Request_Field = {
         "Addendum_Tag_Data": 0,
     },
     "05_NT": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Terminal_Type": 1,
         "Settlement_Indicator": 1,
         "Reserved": 2,
@@ -417,15 +422,14 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "05_NO": {
-        # Uses Standard Map
-
+        "Standard_Map_Dict": 0,
         # Term Diagnostics
         "Terminal_Diagnostics": 0,
         # Client Disc Data
         "Discretionary_Data": 0,
     },
     "05_N2": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Credit_Plan": 5,
         "Offered_Down_Payment": 7,
         # Term Diagnostics
@@ -434,7 +438,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "05_N9": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Card_Type": 4,
         # Term Diagnostics
         "Terminal_Diagnostics": 0,
@@ -442,7 +446,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "05_P0": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Tax_Amount": 6,
         "Customer_Code": 25,
         # Term Diagnostics
@@ -451,7 +455,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "05_P5": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Terminal_Type": 1,
         "Odometer": 6,
         "Driver": 6,
@@ -485,7 +489,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "05_P6": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         # This map appears identical to the P5...?
         "Terminal_Type": 1,
         "Odometer": 6,
@@ -520,7 +524,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "05_P7": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Terminal_Type": 1,
         "Odometer": 6,
         "Driver": 6,
@@ -549,7 +553,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "05_P8": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Terminal_Type": 1,
         "Odometer": 6,
         "Driver": 6,
@@ -593,7 +597,7 @@ z01_Request_Field = {
         "Addendum_Tag_Data": 0,
     },
     "05_W7": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Terminal_Type": 1,
         "Fuel_Service_Type": 2,
         "Prompt_Data": 43,
@@ -627,7 +631,7 @@ z01_Request_Field = {
         "Addendum_Tag_Data": 0,
     },
     "11_B2": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Terminal_Type": 1,
@@ -644,7 +648,7 @@ z01_Request_Field = {
         "Addendum_Tag_Data": 0,
     },
     "11_E3": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Currency_Code": 3,
         "EBT_Type": 2,
         "Terminal_Type": 1,
@@ -660,7 +664,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "11_G2": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Tax_Code": 6,
@@ -679,7 +683,7 @@ z01_Request_Field = {
         "Addendum_Tag_Data": 0,
     },
     "11_N8": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Terminal_Type": 1,
@@ -689,7 +693,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "11_P0": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Tax_Amount": 6,
@@ -700,7 +704,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "11_P5": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Terminal_Type": 1,
@@ -736,7 +740,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "11_P6": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         # Again its the same as P5..?
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
@@ -773,7 +777,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "11_P7": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Terminal_Type": 1,
@@ -805,7 +809,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "11_P8": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Terminal_Type": 1,
@@ -850,7 +854,7 @@ z01_Request_Field = {
         "Addendum_Tag_Data": 0,
     },
     "11_W7": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Terminal_Type": 1,
@@ -886,7 +890,7 @@ z01_Request_Field = {
         "Addendum_Tag_Data": 0,
     },
     "13_B2": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "CVV2_Indicator": 1,
         "CVV2": 4,
         "Moto_Indicator": 1,
@@ -911,9 +915,7 @@ z01_Request_Field = {
         "Addendum_Tag_Data": 0,
     },
     "13_C2": {
-        # Weird Fucking Map
-        # Uses Standard - Unique ID
-
+        "Standard_Map_No_Unique": 0,
         "Currency_Code": 3,
         # Specific Information
         "Terminal_Type": 1,
@@ -931,7 +933,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "13_D3": {
-        # Starts with Standard Map
+        "Standard_Map_Dict": 0,
         # Same as 01 version..?
         "KSN": 16,
         "Pin_Block": 16,
@@ -943,7 +945,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "13_D4": {
-        # Starts with standard Map
+        "Standard_Map_Dict": 0,
         "KSN": 16,
         "Pin_Block": 16,
         "Cash_Back_Amount": 6,
@@ -960,7 +962,7 @@ z01_Request_Field = {
         "Addendum_Tag_Data": 0,
     },
     "13_E3": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Currency_Code": 3,
         "EBT_Type": 2,
         "Terminal_Type": 1,
@@ -976,7 +978,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "13_F0": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Mail_Indicator": 1,
         "Terminal_Type": 1,
         "Reserved": 2,
@@ -986,7 +988,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "13_F2": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "CVV2_Presence_Indicator": 1,
         "CVV2": 4,
         "Moto_Indicator": 1,
@@ -999,7 +1001,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "13_G2": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Tax_Amount": 6,
         "Customer_Code": 25,
         "Surcharge_Amount": 6,
@@ -1016,14 +1018,14 @@ z01_Request_Field = {
         "Addendum_Tag_Data": 0,
     },
     "13_N0": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         # Term Diagnostics
         "Terminal_Diagnostics": 0,
         # Client Disc Data
         "Discretionary_Data": 0,
     },
     "13_N2": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Credit_Plan": 5,
         "Offered_Down_Payment": 7,
         "Product_Code_1": 4,
@@ -1038,7 +1040,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "13_P0": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Tax_Code": 6,
         "Customer_Code": 25,
         # Term Diagnostics
@@ -1047,7 +1049,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "13_P5": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Odometer": 6,
         "Driver": 6,
         "Control_Number": 4,
@@ -1080,7 +1082,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "13_P6": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Odometer": 6,
         "Driver": 6,
         "Control_Number": 4,
@@ -1113,7 +1115,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "13_P7": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Terminal_Type": 1,
         "Odometer": 6,
         "Driver": 6,
@@ -1143,7 +1145,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "13_P8": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Odometer": 6,
         "Driver": 6,
         "Control_Number": 4,
@@ -1185,7 +1187,7 @@ z01_Request_Field = {
         "Addendum_Tag_Data": 0,
     },
     "13_W7": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Terminal_Type": 1,
         "Fuel_Service_Type": 2,
         "Prompt_Data": 43,
@@ -1214,12 +1216,11 @@ z01_Request_Field = {
         "Terminal_Diagnostics": 0,
         # Client Disc Data
         "Discretionary_Data": 0,
-        # Addendum Tag Data
         # Addendum_Tag_Data
         "Addendum_Tag_Data": 0,
     },
     "30_B2": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "PoS_Data_Codes": 12,
         "Mobile_Device_Indicator": 1,
         "Reserved": 1,
@@ -1234,24 +1235,7 @@ z01_Request_Field = {
         "Addendum_Tag_Data": 0,
     },
     "30_C2": {
-        # In the stupid Z01 Spec this map has duplicated standard map with random twists?
-        # This might need reword to use the standard map -Uniq Dev ID
-        "Company_Identifier": 4,
-        "Terminal_Class_ID": 1,
-        "Terminal_Format_Level": 2,
-        "Multiple_Inquiry_Flag": 1,
-        "Response_Format_Code": 2,
-        "Request_Format_Code": 2,
-        "Transaction_Type": 2,
-        "Sequence_Number": 6,
-        "Date": 6,
-        "Time": 4,
-        "Terminal_ID": 15,  # Named Terminal_ID in spec's map info
-        "Company_ID": 4,
-        # Detail Information
-        "Track_2_Data": 37,
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
+        "Standard_Map_No_Unique": 0,
         "Currency_Code": 3,
         # Specific Information
         "Terminal_Type": 1,
@@ -1267,7 +1251,7 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "30_??": {
-        # Uses Standard Map
+        "Standard_Map_Dict": 0,
         "Currency_Code": 3,
         "EBT_Type": 2,
         "Cash_Back_Amount": 6,
