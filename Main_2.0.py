@@ -1,152 +1,5 @@
 import sys
 
-z01_Request_Fields = {
-    "Standard_Map_Data": {
-        "Company_Identifier": 4,
-        "Terminal_Class_ID": 1,
-        "Terminal_Format_Level": 2,
-        "Multiple_Inquiry_Flag": 1,
-        "Response_Format_Code": 2,
-        "Request_Format_Code": 2,
-        "Transaction_Type": 2,
-        "Sequence_Number": 6,
-        "Date": 6,
-        "Time": 4,
-        "Terminal_Location_ID": 15,  # Named Terminal_ID in spec's map info
-        "Company_ID": 4,
-        "Unique_Device_ID": 4,
-        "Account_Number": 0,  # Variable Length
-        "Field_Sep_Track2": 1,
-        "Exp_Date_Track2:": 4,
-        "Disc_Data_Track2": 0,  # Variable_Length
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
-        "Currency_Code": 3,
-        "Terminal_Type": 1,
-        "Authorization_Number:": 6,
-    },
-    "Detail_Information": {
-        # "Track_1": 76,  # 76 is the max value
-        "Track_2": 37,  # 37 is the max value
-        "Card_Use_Type": 1,
-        "Total_Amount": 7,
-        "Credit_Plan": 5,
-        "Authorization_Number": 6,
-        "Authorization_Type": 1,
-        "Surcharge_Amount": 6,
-        "Offered_Down_Payment": 7,
-        "Tax_Amount": 6,
-        "Chip_Condition_Code": 1,
-        "PO_number": 15,
-        "CVV2_Presence_Indicator": 1,
-        "CVV2": 4,
-        "Moto_Indicator": 1,
-        "Settlement_Indicator": 1,
-        "Filler": 1,
-        "KSN": [0, 16, 20],
-        "Encrypted_Pin_Block": 16,
-        "Cash_Back_Amount": 6,
-        "Convenience_Fee_Amount": 6,
-        "Terminal_Type": 1,
-        "PoS_Data_Codes": 12,
-        "Mobile_Device_Indicator": 1,
-        "Authorisation_Response_Code": 2,
-        "Reserved": [1, 4, 17, 20, 66],
-        "Addendum_Presence_Indicator": 1,
-        "Currency_Code": 3,
-        "Goods_Sold": 1,
-        "Card_Type": 4,
-        "Customer_Code": 25,
-        "Odometer": 6,
-        "Driver_Number": 6,
-        "Control_Number": 4,
-        "Vehicle_Number": 6,
-        "Fuel_Measure": 1,
-        "Fuel_Service_Type": 2,
-        "Prompt_Data": 43,
-        "Purchase_Device_Seq_Num": 5,
-        "Avail_Prod_Capable_Ind": 1,
-        "Product_Code_Set": 2,
-        "Unit_Measure_1": 1,
-        "Product_Code_1": [2, 3],
-        "Quantity_1": 7,
-        "Amount_1": 7,
-        "Unit_Measure_2": 1,
-        "Product_Code_2": [2, 3],
-        "Quantity_2": 7,
-        "Amount_2": 7,
-        "Unit_Measure_3": 1,
-        "Product_Code_3": [2, 3],
-        "Quantity_3": 7,
-        "Amount_3": 7,
-        "Unit_Measure_4": 1,
-        "Product_Code_4": [2, 3],
-        "Quantity_4": 7,
-        "Amount_4": 7,
-        "Product_Code_5": [2, 3],
-        "Quantity_5": 7,
-        "Amount_5": 7,
-        "Product_Code_6": [2, 3],
-        "Quantity_6": 7,
-        "Amount_6": 7,
-        "Sales_Tax": 5,
-        "Discount": 5,
-
-    },
-    "Specific_Information": {
-        "Terminal Type": 1,
-        "Authorization_Number": 6,
-        "Card_Type": 4,
-        "Employee_ID": 8,
-        "Shift_Number": 3,
-        "Control_Number": 6,
-        "Access_Code": 4,
-        "Terminal_Reference_Number": 12,
-        "Retrieval_Ref_Num": 12,
-        "Term_Ref_Num": 12
-    },
-    "Terminal_Diagnostics": {
-        "Number_Dial_Attempts": 1,
-        "Terminal_Reason_Code": 2,
-        "Host_Dialed": 1,
-    },
-    "End_Terminal_Diagnostics": {
-        "Reserved": [18, 19, 26],
-        "Folio_Area_Tag": 2,
-        "Purchase_ID_Format_Code": 1,
-        "AVS_Area_Tag": 2,
-        "AVS_Information": 0,  # Variable Length
-        "Field_Separator": 1,
-        "Variable_Data_Area_Tag": 2,
-
-    },
-    "Client_Discretionary_Data_Dict": {
-        "Client_Discretionary_Data": 0,  # Variable Length Data
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1,
-    },
-    "Addendum_Data_Length": {
-        "Field_Separator": 1,
-        "Addendum_Data_Length": 4,
-        "Number Tag_IDs": 2,
-        "Tag ID": 3,
-        "Tag_Data_Length": 4,
-        "Tag_Data": 0,
-        "Field_Separator_Holder": 0
-    },
-    "Disc_Data_Capture_Fields": {
-        "Authorization_Disc_Data": 0,  # Variable Length
-        "Capture_Field_Identifier": 1,
-        "Terminal_Type": 1,
-        "Capture_Sequence_Number": 6,
-        "Capture_Total_Amount": 6,
-        "Capture_Disc_Data": 0,  # Variable Length
-        "Field_Separator": 1,
-        "Field_Separator_Holder": 1
-    },
-
-}
-
 Terminal_Diagnostics_Dict = {
     # Terminal_Diagnostics
     "Number_Dial_Attempts": 1,
@@ -210,7 +63,7 @@ Standard_Map_Dict = {
 }
 
 Standard_Map_No_Unique_Dict = {
-    #Standard_Map_No_Unique
+    # Standard_Map_No_Unique
     "Company_Identifier": 4,
     "Terminal_Class_ID": 1,
     "Terminal_Format_Level": 2,
@@ -230,7 +83,6 @@ Standard_Map_No_Unique_Dict = {
     "Card_Use_Type": 1,  # Adding these to standard map to reduce replication
     "Total_Amount": 7,  # Adding these to standard map to reduce replication
 }
-
 
 z01_Request_Field = {
     "01_C2": {
@@ -317,7 +169,26 @@ z01_Request_Field = {
         "Discretionary_Data": 0,
     },
     "05_B2": {
-        "Standard_Map_Dict": 0,
+        # "Standard_Map_Dict": 0,
+        "Company_Identifier": 4,
+        "Terminal_Class_ID": 1,
+        "Terminal_Format_Level": 2,
+        "Multiple_Inquiry_Flag": 1,
+        "Response_Format_Code": 2,
+        "Request_Format_Code": 2,
+        "Transaction_Type": 2,
+        "Sequence_Number": 6,
+        "Date": 6,
+        "Time": 4,
+        "Terminal_Location_ID": 15,  # Named Terminal_ID in spec's map info
+        "Company_ID": 4,
+        "Unique_Device_ID": 4,  # This is not always present
+        "Account_Number": 0,  # Variable Length
+        "Field_Sep_Track2": 1,
+        "Exp_Date_Track2:": 4,
+        "Disc_Data_Track2": 16,  # Variable_Length, MUST NOT HARDCODE
+        "Card_Use_Type": 1,  # Adding these to standard map to reduce replication
+        "Total_Amount": 7,  # Adding these to standard map to reduce replication
         "CVV2_Indicator": 1,
         "CVV2": 4,
         "Moto_Indicator": 1,
@@ -333,7 +204,7 @@ z01_Request_Field = {
         "Reserved_2": 33,
         "Addendum_Presence_Indicator": 1,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # End of Term Diagnostics
         "Reserved_3": 19,
         "AVS_Area_Tag": 2,
@@ -1274,12 +1145,100 @@ print(user_Input)
 
 user_Input_Combined = ''
 for user_Input_String in user_Input:
-    user_Input_String = user_Input_String.partition("INF:      ")[2]
-    user_Input_String = user_Input_String.partition("\\n'")[0]
+    user_Input_String = user_Input_String.partition("INF:")[2]
+    user_Input_String = user_Input_String.partition("\\")[0]
     user_Input_String = user_Input_String.replace("'", "")
     user_Input_String = user_Input_String.replace("]", "")
-    user_Input_Combined += user_Input_String + " "
+    user_Input_String = user_Input_String.replace("1E", "=")
+    user_Input_String = user_Input_String.replace("1C", "=")
+    print(user_Input_String)
+    #user_Input_Combined = "".join(user_Input_String)
+    user_Input_Combined += user_Input_String
+    user_Input_Combined = user_Input_Combined.replace("      ", " ")
+    user_Input_Combined = user_Input_Combined.replace("  ", " ")
 
-user_Input_Combined = user_Input_Combined.replace("  ", " ")
 user_Input_List = user_Input_Combined.split(" ")
+user_Input_List = user_Input_List[1:]
+print(user_Input_List)  # this is the full input placed into one list, with each 'byte' separated
+
+start_index = 0
+end_index = 0
+
+
+def standard_map_constructor(number):
+    global start_index
+    global end_index
+    end_index += number
+    map_value = ("".join(user_Input_List[start_index:end_index:1]))
+    start_index += number
+    return map_value
+
+
+# start_index_2 = 0
+# end_index_2 = 0
+
+
+# def map_constructor(number):
+#     global start_index_2
+#     global end_index_2
+#     # if map value = "" then look for field sep and update index positions
+#     if number == 0:
+#         end_index_2 = (user_Input_List.index("="))
+#     end_index_2 += number
+#     map_value_2 = ("".join(user_Input_List[start_index_2:end_index_2:1]))
+#     start_index_2 += number
+#     return map_value_2
+
+def map_constructor(data_length):
+    global user_Input_List
+    # if map value = "" then look for field sep and update index positions
+    try:
+        if data_length == 999:
+            # This would need to loop through the term diag dict AND update the string value
+            for x, y in Terminal_Diagnostics_Dict.items():
+                print(x + ": " + "".join(user_Input_List[:y]))
+                user_Input_List = user_Input_List[y:]
+    except TypeError:
+        pass
+
+    try:
+        if data_length == 0:
+            data_length = user_Input_List.index("=")
+    except ValueError:
+        pass
+
+    map_string = "".join(user_Input_List[0:data_length:1])
+    user_Input_List = user_Input_List[data_length:]
+    return map_string
+
+
+standard_map_list = []
+terminal_diagnostics_list = []
+B2_05 = []
+
+for h, i in Standard_Map_Dict.items():
+    standard_map_list.append((h + ": " + standard_map_constructor(i)))
+#print(standard_map_list)  # This value is the output for the standard map, placed into a list separated for each value
+
+request_format_code = standard_map_list[5].split(": ")[1]
+transaction_type = standard_map_list[6].split(": ")[1]
+
+if request_format_code == "B2" and transaction_type == "05":
+    for h, i in z01_Request_Field["05_B2"].items():
+        print((h + ": " + map_constructor(i)))
+
 print(user_Input_List)
+
+# print(z01_Request_Field["05_B2"])
+
+# if request_format_code == "B2" and transaction_type == "05":
+#     for value in z01_Request_Field["05_B2"]:
+#         if value.split(": ")[0] == "Standard_Map_Dict":
+#             for i in standard_map_list:
+#                 print(i)
+#         elif value.split(": ")[0] == "Terminal_Diagnostics":
+#             for h, i in Terminal_Diagnostics_Dict.items():
+#                 terminal_diagnostics_list.append((h + ": " + standard_map_constructor(i)))
+#                 for j in terminal_diagnostics_list:
+#                     print(j)
+#             print(standard_map_list)
