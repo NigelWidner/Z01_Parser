@@ -1144,6 +1144,7 @@ user_Input = user_Input.split(",")
 print(user_Input)
 
 user_Input_Combined = ''
+
 for user_Input_String in user_Input:
     user_Input_String = user_Input_String.partition("INF:")[2]
     user_Input_String = user_Input_String.partition("\\")[0]
