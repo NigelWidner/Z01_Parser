@@ -1,46 +1,12 @@
 import sys
 
-Terminal_Diagnostics_Dict = {
-    # Terminal_Diagnostics
-    "Number_Dial_Attempts": 1,
-    "Terminal_Reason_Code": 2,
-    "Host_Dialed": 1,
-}
 
-Terminal_Diagnostics_Plus_Dict = {
-    # Terminal_Diagnostics_Plus
-    "Number_Dial_Attempts": 1,
-    "Terminal_Reason_Code": 2,
-    "Host_Dialed": 1,
-    "Folio_Area_Tag": 2,
-    "Purchase_ID_Format_Code": 1,
-    "Reserved_2": 39,
-    "Field_Separator_2": 1,
-    "AVS_Area_Tag": 2,
-    "AVS_Information": 0,
-    "Field_Separator_3": 1,
-    "Variable_Data_Area_Tag": 2,
-}
+def check_for_zero(key_value):
+    pass
 
-Discretionary_Data_Dict = {
-    # Discretionary_Data
-    "Client_Discretionary_Data": 0,
-    "Field_Separator": 1,
-    "Field_Separator_Holder": 1,
-}
-
-Addendum_Tag_Data_Dict = {
-    # Addendum_Tag_Data
-    "Field_Separator_2": 1,
-    "Addendum_Data_Length": 4,
-    "Number_Tag_IDs": 2,
-    "Tag_ID": 3,
-    "Tag_Data_Length": 4,
-    "Tag_Data": 0,
-    "Field_Separator_Holder_2": 1,
-}
 
 Standard_Map_Dict = {
+    # 1001
     "Company_Identifier": 4,
     "Terminal_Class_ID": 1,
     "Terminal_Format_Level": 2,
@@ -57,13 +23,13 @@ Standard_Map_Dict = {
     "Account_Number": 0,  # Variable Length
     "Field_Sep_Track2": 1,
     "Exp_Date_Track2:": 4,
-    "Disc_Data_Track2": 0,  # Variable_Length
+    "Disc_Data_Track2": 995,  # Variable_Length
     "Card_Use_Type": 1,  # Adding these to standard map to reduce replication
     "Total_Amount": 7,  # Adding these to standard map to reduce replication
 }
 
 Standard_Map_No_Unique_Dict = {
-    # Standard_Map_No_Unique
+    # 1000
     "Company_Identifier": 4,
     "Terminal_Class_ID": 1,
     "Terminal_Format_Level": 2,
@@ -84,9 +50,49 @@ Standard_Map_No_Unique_Dict = {
     "Total_Amount": 7,  # Adding these to standard map to reduce replication
 }
 
+Terminal_Diagnostics_Dict = {
+    # 999
+    "Number_Dial_Attempts": 1,
+    "Terminal_Reason_Code": 2,
+    "Host_Dialed": 1,
+}
+
+Terminal_Diagnostics_Plus_Dict = {
+    # 998
+    "Number_Dial_Attempts": 1,
+    "Terminal_Reason_Code": 2,
+    "Host_Dialed": 1,
+    "Folio_Area_Tag": 2,
+    "Purchase_ID_Format_Code": 1,
+    "Reserved_2": 39,
+    "Field_Separator_2": 1,
+    "AVS_Area_Tag": 2,
+    "AVS_Information": 0,
+    "Field_Separator_3": 1,
+    "Variable_Data_Area_Tag": 2,
+}
+
+Discretionary_Data_Dict = {
+    # 997
+    "Client_Discretionary_Data": 0,
+    "Field_Separator": 1,
+    "Field_Separator_Holder": 1,
+}
+
+Addendum_Tag_Data_Dict = {
+    # 996
+    "Field_Separator_2": 1,
+    "Addendum_Data_Length": 4,
+    "Number_Tag_IDs": 2,
+    "Tag_ID": 3,
+    "Tag_Data_Length": 4,
+    "Tag_Data": 0,
+    "Field_Separator_Holder_2": 1,
+}
+
 z01_Request_Field = {
     "01_C2": {
-        "Standard_Map_No_Unique": 0,
+        "Standard_Map_No_Unique": 1000,
         "Currency_Code": 3,
         # Specific Information
         "Terminal_Type": 1,
@@ -97,23 +103,23 @@ z01_Request_Field = {
         "Access_Code": 4,
         "Term_Reference_Number": 12,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "01_D3": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "KSN": 16,
         "Pin_Block": 16,
         "Cash_Back_Amount": 6,
         "Convenience_Fee_Amount": 6,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "01_D4": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "KSN": 16,
         "Pin_Block": 16,
         "Cash_Back_Amount": 6,
@@ -124,24 +130,24 @@ z01_Request_Field = {
         "Reserved": 20,
         "Addendum_Presence_Ind": 1,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
         # Addendum_Tag_Data
-        "Addendum_Tag_Data": 0,
+        "Addendum_Tag_Data": 996,
     },
     "03_C1": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Currency_Code": 3,
         "Terminal_Type": 1,
         "Authorization_Number": 6,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "03_C2": {
-        "Standard_Map_No_Unique": 0,
+        "Standard_Map_No_Unique": 1000,
         "Currency_Code": 3,
         # Specific Information
         "Authorization_Number": 6,
@@ -154,22 +160,22 @@ z01_Request_Field = {
         "Retrieval_Ref_Num": 12,
         "Term_Reference_Number": 12,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "03_D0": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Cash_Back_Amount": 6,
         "Convenience_Fee_Amount": 6,
         "Reserved": 8,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
-    "05_B2": {
-        # "Standard_Map_Dict": 0,
+    "B205": {
+        # "Standard_Map_Dict": 1001,
         "Company_Identifier": 4,
         "Terminal_Class_ID": 1,
         "Terminal_Format_Level": 2,
@@ -186,7 +192,7 @@ z01_Request_Field = {
         "Account_Number": 0,  # Variable Length
         "Field_Sep_Track2": 1,
         "Exp_Date_Track2:": 4,
-        "Disc_Data_Track2": 16,  # Variable_Length, MUST NOT HARDCODE
+        "Disc_Data_Track2": 0,  # Variable_Length
         "Card_Use_Type": 1,  # Adding these to standard map to reduce replication
         "Total_Amount": 7,  # Adding these to standard map to reduce replication
         "CVV2_Indicator": 1,
@@ -204,7 +210,10 @@ z01_Request_Field = {
         "Reserved_2": 33,
         "Addendum_Presence_Indicator": 1,
         # Term Diagnostics
-        "Terminal_Diagnostics": 999,
+        # "Terminal_Diagnostics": 999,
+        "Number_Dial_Attempts": 1,
+        "Terminal_Reason_Code": 2,
+        "Host_Dialed": 1,
         # End of Term Diagnostics
         "Reserved_3": 19,
         "AVS_Area_Tag": 2,
@@ -212,18 +221,28 @@ z01_Request_Field = {
         "Field Separator": 1,
         "Variable_Data_Area_Tag": 2,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        # "Discretionary_Data": 997,
+        "Client_Discretionary_Data": 0,
+        "Field_Separator": 1,
+        "Field_Separator_Holder": 1,
         # Addendum_Tag_Data
-        "Addendum_Tag_Data": 0,
+        # "Addendum_Tag_Data": 996,
+        "Field_Separator_2": 1,
+        "Addendum_Data_Length": 4,
+        "Number_Tag_IDs": 2,
+        "Tag_ID": 3,
+        "Tag_Data_Length": 4,
+        "Tag_Data": 0,
+        "Field_Separator_Holder_2": 1,
     },
     "05_F0": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Terminal_Type": 1,
         "Settlement_Indicator": 1,
         "Filler": 1,
         "Good_Sold": 1,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # End of Terminal Diagnostics
         "Folio_Area_Tag": 2,
         "Purch_ID_Format_Code": 1,
@@ -236,10 +255,10 @@ z01_Request_Field = {
         "Field Separator": 1,
         "Variable_Data_Area_Tag": 2,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "05_F2": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "CVV2_Indicator": 1,
         "CVV2": 4,
         "Moto_Indicator": 1,
@@ -247,7 +266,7 @@ z01_Request_Field = {
         "Settlement_Indicator": 1,
         "Filler": 1,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # End of Terminal Diagnostics
         "Folio_Area_Tag": 2,
         "Purch_ID_Format_Code": 1,
@@ -260,10 +279,10 @@ z01_Request_Field = {
         "Field Separator": 1,
         "Variable_Data_Area_Tag": 2,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "05_G2": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Tax_Amount": 6,
         "Customer_Code": 25,
         "PoS_Data_Codes": 12,
@@ -276,57 +295,57 @@ z01_Request_Field = {
         "Reserved_2": 32,
         "Addendum_Presence_Indicator": 1,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
         # Addendum_Tag_Data
-        "Addendum_Tag_Data": 0,
+        "Addendum_Tag_Data": 996,
     },
     "05_NT": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Terminal_Type": 1,
         "Settlement_Indicator": 1,
         "Reserved": 2,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "05_NO": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "05_N2": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Credit_Plan": 5,
         "Offered_Down_Payment": 7,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "05_N9": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Card_Type": 4,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "05_P0": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Tax_Amount": 6,
         "Customer_Code": 25,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "05_P5": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Terminal_Type": 1,
         "Odometer": 6,
         "Driver": 6,
@@ -355,12 +374,12 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "05_P6": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         # This map appears identical to the P5...?
         "Terminal_Type": 1,
         "Odometer": 6,
@@ -390,12 +409,12 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "05_P7": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Terminal_Type": 1,
         "Odometer": 6,
         "Driver": 6,
@@ -419,12 +438,12 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "05_P8": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Terminal_Type": 1,
         "Odometer": 6,
         "Driver": 6,
@@ -461,14 +480,14 @@ z01_Request_Field = {
         "Reserved": 17,
         "Addendum_Presence_Indicator": 1,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
         # Addendum_Tag_Data
-        "Addendum_Tag_Data": 0,
+        "Addendum_Tag_Data": 996,
     },
     "05_W7": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Terminal_Type": 1,
         "Fuel_Service_Type": 2,
         "Prompt_Data": 43,
@@ -495,14 +514,14 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
         # Addendum_Tag_Data
-        "Addendum_Tag_Data": 0,
+        "Addendum_Tag_Data": 996,
     },
     "11_B2": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Terminal_Type": 1,
@@ -512,14 +531,14 @@ z01_Request_Field = {
         "Reserved": 66,
         "Addendum_Presence_Indicator": 1,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
         # Addendum_Tag_Data
-        "Addendum_Tag_Data": 0,
+        "Addendum_Tag_Data": 996,
     },
     "11_E3": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Currency_Code": 3,
         "EBT_Type": 2,
         "Terminal_Type": 1,
@@ -530,12 +549,12 @@ z01_Request_Field = {
         "Voucher_Number": 15,
         "Reserved": 10,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "11_G2": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Tax_Code": 6,
@@ -547,35 +566,35 @@ z01_Request_Field = {
         "Reserved": 65,
         "Addendum_Presence_Indicator": 1,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
         # Addendum_Tag_Data
-        "Addendum_Tag_Data": 0,
+        "Addendum_Tag_Data": 996,
     },
     "11_N8": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Terminal_Type": 1,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "11_P0": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Tax_Amount": 6,
         "Customer_Code": 25,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "11_P5": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Terminal_Type": 1,
@@ -606,12 +625,12 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "11_P6": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         # Again its the same as P5..?
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
@@ -643,12 +662,12 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "11_P7": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Terminal_Type": 1,
@@ -675,12 +694,12 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "11_P8": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Terminal_Type": 1,
@@ -718,14 +737,14 @@ z01_Request_Field = {
         "Reserved_2": 20,
         "Addendum_Presence_Indicator": 1,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
         # Addendum_Tag_Data
-        "Addendum_Tag_Data": 0,
+        "Addendum_Tag_Data": 996,
     },
     "11_W7": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Authorisation_Number": 6,
         "Authorization_Type": 1,
         "Terminal_Type": 1,
@@ -754,14 +773,14 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
         # Addendum_Tag_Data
-        "Addendum_Tag_Data": 0,
+        "Addendum_Tag_Data": 996,
     },
     "13_B2": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "CVV2_Indicator": 1,
         "CVV2": 4,
         "Moto_Indicator": 1,
@@ -776,17 +795,17 @@ z01_Request_Field = {
         "Reserved": 3,
         "Addendum_Presence_Indicator": 1,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         "AVS_Area_Tag": 2,
         "AVS_Information": 0,
         "Field_Separator": 1,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
         # Addendum_Tag_Data
-        "Addendum_Tag_Data": 0,
+        "Addendum_Tag_Data": 996,
     },
     "13_C2": {
-        "Standard_Map_No_Unique": 0,
+        "Standard_Map_No_Unique": 1000,
         "Currency_Code": 3,
         # Specific Information
         "Terminal_Type": 1,
@@ -799,24 +818,24 @@ z01_Request_Field = {
         "Usage_Code": 1,
         "Terminal_Reference_Number": 12,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "13_D3": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         # Same as 01 version..?
         "KSN": 16,
         "Pin_Block": 16,
         "Cash_Back_Amount": 6,
         "Convenience_Fee_Amount": 6,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "13_D4": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "KSN": 16,
         "Pin_Block": 16,
         "Cash_Back_Amount": 6,
@@ -826,14 +845,14 @@ z01_Request_Field = {
         "Reserved": 21,
         "Addendum_Presence_Ind": 1,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
         # Addendum_Tag_Data
-        "Addendum_Tag_Data": 0,
+        "Addendum_Tag_Data": 996,
     },
     "13_E3": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Currency_Code": 3,
         "EBT_Type": 2,
         "Terminal_Type": 1,
@@ -844,22 +863,22 @@ z01_Request_Field = {
         "Convenience_Fee_Amount": 6,
         "Reserved": 25,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "13_F0": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Mail_Indicator": 1,
         "Terminal_Type": 1,
         "Reserved": 2,
         # Term Diagnostics Plus
         "Terminal_Diagnostics_Plus": 0,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "13_F2": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "CVV2_Presence_Indicator": 1,
         "CVV2": 4,
         "Moto_Indicator": 1,
@@ -869,10 +888,10 @@ z01_Request_Field = {
         # Term Diagnostics Plus
         "Terminal_Diagnostics_Plus": 0,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "13_G2": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Tax_Amount": 6,
         "Customer_Code": 25,
         "Surcharge_Amount": 6,
@@ -882,21 +901,21 @@ z01_Request_Field = {
         "Reserved": 65,
         "Addendum_Presence_indicator": 1,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
         # Addendum_Tag_Data
-        "Addendum_Tag_Data": 0,
+        "Addendum_Tag_Data": 996,
     },
     "13_N0": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "13_N2": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Credit_Plan": 5,
         "Offered_Down_Payment": 7,
         "Product_Code_1": 4,
@@ -906,21 +925,21 @@ z01_Request_Field = {
         "Product_Code_5": 4,
         "Unused": 11,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "13_P0": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Tax_Code": 6,
         "Customer_Code": 25,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "13_P5": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Odometer": 6,
         "Driver": 6,
         "Control_Number": 4,
@@ -948,12 +967,12 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "13_P6": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Odometer": 6,
         "Driver": 6,
         "Control_Number": 4,
@@ -981,12 +1000,12 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "13_P7": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Terminal_Type": 1,
         "Odometer": 6,
         "Driver": 6,
@@ -1011,12 +1030,12 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "13_P8": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Odometer": 6,
         "Driver": 6,
         "Control_Number": 4,
@@ -1051,14 +1070,14 @@ z01_Request_Field = {
         "Reserved": 20,
         "Addendum_Presence_Indicator": 1,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
         # Addendum_Tag_Data
-        "Addendum_Tag_Data": 0,
+        "Addendum_Tag_Data": 996,
     },
     "13_W7": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Terminal_Type": 1,
         "Fuel_Service_Type": 2,
         "Prompt_Data": 43,
@@ -1084,14 +1103,14 @@ z01_Request_Field = {
         "Sales_Tax": 5,
         "Discount": 5,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
         # Addendum_Tag_Data
-        "Addendum_Tag_Data": 0,
+        "Addendum_Tag_Data": 996,
     },
     "30_B2": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "PoS_Data_Codes": 12,
         "Mobile_Device_Indicator": 1,
         "Reserved": 1,
@@ -1099,14 +1118,14 @@ z01_Request_Field = {
         "Reserved_2": 40,
         "Addendum_Presence_Indicator": 1,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
         # Addendum_Tag_Data
-        "Addendum_Tag_Data": 0,
+        "Addendum_Tag_Data": 996,
     },
     "30_C2": {
-        "Standard_Map_No_Unique": 0,
+        "Standard_Map_No_Unique": 1000,
         "Currency_Code": 3,
         # Specific Information
         "Terminal_Type": 1,
@@ -1117,34 +1136,36 @@ z01_Request_Field = {
         "Access_Code": 4,
         "Term_Reference_Number": 12,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
     "30_??": {
-        "Standard_Map_Dict": 0,
+        "Standard_Map_Dict": 1001,
         "Currency_Code": 3,
         "EBT_Type": 2,
         "Cash_Back_Amount": 6,
         "Convenience_Fee_Amount": 6,
         "Reserved": 10,
         # Term Diagnostics
-        "Terminal_Diagnostics": 0,
+        "Terminal_Diagnostics": 999,
         # Client Disc Data
-        "Discretionary_Data": 0,
+        "Discretionary_Data": 997,
     },
 }
 
+# Entry point, takes multi-line input that needs formatting
 print("Enter string, press 'ctrl+d' when done to input")
 user_Input = str(sys.stdin.readlines())  # Reads multi-line string input and assigns to variable
 print(user_Input)
 print("~-~-~-~-~-~-~")
 
+# Turns input into list of strings
 user_Input = user_Input.split(",")
 print(user_Input)
 
+# Generic formatting. Ends by combining the list of strings into one string, with 1 space separator
 user_Input_Combined = ''
-
 for user_Input_String in user_Input:
     user_Input_String = user_Input_String.partition("INF:")[2]
     user_Input_String = user_Input_String.partition("\\")[0]
@@ -1153,93 +1174,51 @@ for user_Input_String in user_Input:
     user_Input_String = user_Input_String.replace("1E", "=")
     user_Input_String = user_Input_String.replace("1C", "=")
     print(user_Input_String)
-    #user_Input_Combined = "".join(user_Input_String)
+    # user_Input_Combined = "".join(user_Input_String)
     user_Input_Combined += user_Input_String
     user_Input_Combined = user_Input_Combined.replace("      ", " ")
     user_Input_Combined = user_Input_Combined.replace("  ", " ")
+    user_Input_Combined = user_Input_Combined.replace("   ", " ")
 
+# Now that the data is formatted, it breaks the string into single 'byte' strings in a list
 user_Input_List = user_Input_Combined.split(" ")
-user_Input_List = user_Input_List[1:]
-print(user_Input_List)  # this is the full input placed into one list, with each 'byte' separated
-
-start_index = 0
-end_index = 0
-
-
-def standard_map_constructor(number):
-    global start_index
-    global end_index
-    end_index += number
-    map_value = ("".join(user_Input_List[start_index:end_index:1]))
-    start_index += number
-    return map_value
-
-
-# start_index_2 = 0
-# end_index_2 = 0
-
-
-# def map_constructor(number):
-#     global start_index_2
-#     global end_index_2
-#     # if map value = "" then look for field sep and update index positions
-#     if number == 0:
-#         end_index_2 = (user_Input_List.index("="))
-#     end_index_2 += number
-#     map_value_2 = ("".join(user_Input_List[start_index_2:end_index_2:1]))
-#     start_index_2 += number
-#     return map_value_2
-
-def map_constructor(data_length):
-    global user_Input_List
-    # if map value = "" then look for field sep and update index positions
-    try:
-        if data_length == 999:
-            # This would need to loop through the term diag dict AND update the string value
-            for x, y in Terminal_Diagnostics_Dict.items():
-                print(x + ": " + "".join(user_Input_List[:y]))
-                user_Input_List = user_Input_List[y:]
-    except TypeError:
-        pass
-
-    try:
-        if data_length == 0:
-            data_length = user_Input_List.index("=")
-    except ValueError:
-        pass
-
-    map_string = "".join(user_Input_List[0:data_length:1])
-    user_Input_List = user_Input_List[data_length:]
-    return map_string
-
-
-standard_map_list = []
-terminal_diagnostics_list = []
-B2_05 = []
-
-for h, i in Standard_Map_Dict.items():
-    standard_map_list.append((h + ": " + standard_map_constructor(i)))
-#print(standard_map_list)  # This value is the output for the standard map, placed into a list separated for each value
-
-request_format_code = standard_map_list[5].split(": ")[1]
-transaction_type = standard_map_list[6].split(": ")[1]
-
-if request_format_code == "B2" and transaction_type == "05":
-    for h, i in z01_Request_Field["05_B2"].items():
-        print((h + ": " + map_constructor(i)))
-
+user_Input_List = user_Input_List[1:]  # Have to remove an awkward starting ' '
 print(user_Input_List)
 
-# print(z01_Request_Field["05_B2"])
+# Pulls the map type needed from the fully formatted list of single byte strings
+request_format_code = "".join(user_Input_List[10:12])
+transaction_type = "".join(user_Input_List[12:14])
+map_selection = request_format_code + transaction_type
 
-# if request_format_code == "B2" and transaction_type == "05":
-#     for value in z01_Request_Field["05_B2"]:
-#         if value.split(": ")[0] == "Standard_Map_Dict":
-#             for i in standard_map_list:
-#                 print(i)
-#         elif value.split(": ")[0] == "Terminal_Diagnostics":
-#             for h, i in Terminal_Diagnostics_Dict.items():
-#                 terminal_diagnostics_list.append((h + ": " + standard_map_constructor(i)))
-#                 for j in terminal_diagnostics_list:
-#                     print(j)
-#             print(standard_map_list)
+
+# Pass map_selection to auto determine which map type to parse
+# Sorts data by Key:Value in specified sub-dictionary from the use_map and cuts out string values by Value in dict
+def map_maker(dictionary):
+    use_map = z01_Request_Field
+    for x, y in use_map[dictionary].items():
+        global user_Input_List
+        start_index = 0
+        end_index = 0
+        end_index += y
+        try:
+            field_sep_keys = ["Account_Number", "AVS_Information", "Client_Discretionary_Data"]
+            if x in field_sep_keys:  # Need to create 'if x == list of items that track field seps'
+                end_index = user_Input_List.index("=")
+                start_index = user_Input_List.index("=")
+            elif x == "Disc_Data_Track2":
+                end_index = user_Input_List.index(["C"])  # This needs to be modified to find multiple 'letters'
+                start_index = user_Input_List.index("C")  # The 'letter' can change based on card type.
+            elif x == "Tag_Data":
+                tag_data_parse = "".join(user_Input_List[:user_Input_List.index("=")])
+                print("Tag_Data_Parse: " + tag_data_parse)
+                continue
+        except ValueError:
+            pass
+        map_data = "".join(user_Input_List[:end_index:1])
+        start_index += y
+        user_Input_List = user_Input_List[start_index:]
+        print(x + ": " + map_data)
+
+
+# MAIN
+map_maker(map_selection)
