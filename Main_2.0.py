@@ -1154,71 +1154,86 @@ z01_Request_Field = {
     },
 }
 
-# Entry point, takes multi-line input that needs formatting
-print("Enter string, press 'ctrl+d' when done to input")
-user_Input = str(sys.stdin.readlines())  # Reads multi-line string input and assigns to variable
-print(user_Input)
-print("~-~-~-~-~-~-~")
+#####################
 
-# Turns input into list of strings
-user_Input = user_Input.split(",")
-print(user_Input)
+user_Input_List = []
 
-# Generic formatting. Ends by combining the list of strings into one string, with 1 space separator
-user_Input_Combined = ''
-for user_Input_String in user_Input:
-    user_Input_String = user_Input_String.partition("INF:")[2]
-    user_Input_String = user_Input_String.partition("\\")[0]
-    user_Input_String = user_Input_String.replace("'", "")
-    user_Input_String = user_Input_String.replace("]", "")
-    user_Input_String = user_Input_String.replace("1E", "=")
-    user_Input_String = user_Input_String.replace("1C", "=")
-    print(user_Input_String)
-    # user_Input_Combined = "".join(user_Input_String)
-    user_Input_Combined += user_Input_String
-    user_Input_Combined = user_Input_Combined.replace("      ", " ")
-    user_Input_Combined = user_Input_Combined.replace("  ", " ")
-    user_Input_Combined = user_Input_Combined.replace("   ", " ")
 
-# Now that the data is formatted, it breaks the string into single 'byte' strings in a list
-user_Input_List = user_Input_Combined.split(" ")
-user_Input_List = user_Input_List[1:]  # Have to remove an awkward starting ' '
-print(user_Input_List)
+def user_input_formatting():
+    # Entry point, takes multi-line input that needs formatting
+    global user_Input_List
+    print("Enter string, press 'ctrl+d' when done to input")
+    user_Input = str(sys.stdin.readlines())  # Reads multi-line string input and assigns to variable
 
-# Pulls the map type needed from the fully formatted list of single byte strings
-request_format_code = "".join(user_Input_List[10:12])
-transaction_type = "".join(user_Input_List[12:14])
-map_selection = request_format_code + transaction_type
+    # Turns input into list of strings
+    user_Input = user_Input.split(",")
 
+    # Generic formatting. Ends by combining the list of strings into one string, with 1 space separator
+    combined_user_input_string = ''
+    for user_input_string in user_Input:
+        user_input_string = user_input_string.partition("INF:")[2]
+        user_input_string = user_input_string.partition("\\")[0]
+        user_input_string = user_input_string.replace("'", "")
+        user_input_string = user_input_string.replace("]", "")
+        user_input_string = user_input_string.replace("1E", "=")
+        user_input_string = user_input_string.replace("1C", "=")
+        user_input_string = user_input_string.replace("  ", " ")
+        user_input_string = user_input_string.replace("   ", " ")
+        combined_user_input_string += user_input_string
+
+    # Now that the data is formatted, it breaks the string into single 'byte' strings in a list
+    user_Input_List = combined_user_input_string.split(" ")[1:]  # Remove first index, it's a weird blank 'byte'
+
+
+######################
+
+
+def map_selection_func():
+    # Pulls the map type needed from the fully formatted list of single byte strings
+    request_format_code = "".join(user_Input_List[10:12])
+    transaction_type = "".join(user_Input_List[12:14])
+    map_selection = request_format_code + transaction_type
+    return map_selection
+
+
+########################
 
 # Pass map_selection to auto determine which map type to parse
 # Sorts data by Key:Value in specified sub-dictionary from the use_map and cuts out string values by Value in dict
 def map_maker(dictionary):
-    use_map = z01_Request_Field
-    for x, y in use_map[dictionary].items():
+    # use_map = z01_Request_Field
+    for key, value in z01_Request_Field[dictionary].items():
         global user_Input_List
         start_index = 0
         end_index = 0
-        end_index += y
+        end_index += value
+
         try:
-            field_sep_keys = ["Account_Number", "AVS_Information", "Client_Discretionary_Data"]
-            if x in field_sep_keys:  # Need to create 'if x == list of items that track field seps'
+            has_field_separator = ["Account_Number", "AVS_Information", "Client_Discretionary_Data"]
+            if key in has_field_separator:
                 end_index = user_Input_List.index("=")
                 start_index = user_Input_List.index("=")
-            elif x == "Disc_Data_Track2":
-                end_index = user_Input_List.index(["C"])  # This needs to be modified to find multiple 'letters'
-                start_index = user_Input_List.index("C")  # The 'letter' can change based on card type.
-            elif x == "Tag_Data":
+
+            elif key == "Disc_Data_Track2":  # This is variable length up to the 'Card Type'
+                end_index = user_Input_List.index(["C"])  # This needs to be modified to find multiple card types
+                start_index = user_Input_List.index("C")
+
+            elif key == "Tag_Data":  # This is pulled out separately so that the tag data can be further parsed
                 tag_data_parse = "".join(user_Input_List[:user_Input_List.index("=")])
                 print("Tag_Data_Parse: " + tag_data_parse)
-                continue
+                continue  # Needed or it prints the 'Tag Data' Key from the dictionary as a blank entry
         except ValueError:
             pass
-        map_data = "".join(user_Input_List[:end_index:1])
-        start_index += y
+
+        field_data = "".join(user_Input_List[:end_index])
+        start_index += value
         user_Input_List = user_Input_List[start_index:]
-        print(x + ": " + map_data)
+        print(key + ": " + field_data)
+
+
+####################
 
 
 # MAIN
-map_maker(map_selection)
+user_input_formatting()
+map_maker(map_selection_func())
