@@ -1149,6 +1149,7 @@ def user_input_formatting():
     user_Input_List = combined_user_input_string.split(" ")[1:]  # Remove first index, it's a weird blank 'byte'
     return user_Input_List
 
+
 ######################
 
 
@@ -1161,24 +1162,28 @@ def map_selection_func(user_input):
 
 
 ########################
-def dict_maker(dict):
-    output_dict = {}
-    template_dicts = [Standard_Map_Dict, Standard_Map_No_Unique_Dict, Terminal_Diagnostics_Dict, Terminal_Diagnostics_Plus_Dict, Discretionary_Data_Dict, Addendum_Tag_Data_Dict]
-    for key, value in z01_Request_Field[dict].items():
+#Loops through the map bases on request type and expands the data using template maps to form a new 'fully expanded' map
+def dict_maker(z01_request_type):
+    created_dictionary = {}
+    template_dicts = [Standard_Map_Dict, Standard_Map_No_Unique_Dict, Terminal_Diagnostics_Dict,
+                      Terminal_Diagnostics_Plus_Dict, Discretionary_Data_Dict, Addendum_Tag_Data_Dict]
+    for key, value in z01_Request_Field[z01_request_type].items():
         if value in template_dicts:
-            for a, b in value.items():
-                output_dict.update({a:b})
+            for key_2, value_2 in value.items():
+                created_dictionary.update({key_2: value_2})
             continue
-        output_dict.update({key:value})
-    pprint.pprint(output_dict, sort_dicts=False)
-    return output_dict
+        created_dictionary.update({key: value})
+    # pprint.pprint(created_dictionary, sort_dicts=False)
+    return created_dictionary
+#returns a map that can be iterated over to actually parse out the map data
+
+
 ########################
 
 # Pass map_selection to auto determine which map type to parse
 # Sorts data by Key:Value in specified sub-dictionary from the use_map and cuts out string values by Value in dict
-def map_maker(dictionary):
-    # use_map = z01_Request_Field
-    for key, value in dictionary.items():
+def request_parser(created_dict):
+    for key, value in created_dict.items():
         global user_Input_List
         start_index = 0
         end_index = 0
@@ -1211,4 +1216,4 @@ def map_maker(dictionary):
 
 
 # MAIN
-map_maker(dict_maker(map_selection_func(user_input_formatting())))
+request_parser(dict_maker(map_selection_func(user_input_formatting())))
