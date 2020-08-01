@@ -1155,14 +1155,16 @@ def user_input_formatting():
 
 def map_selection_func(user_input):
     # Pulls the map type needed from the fully formatted list of single byte strings
+    print(user_input)
     request_format_code = "".join(user_input[10:12])
     transaction_type = "".join(user_input[12:14])
     map_selection = request_format_code + transaction_type
+    print(map_selection)
     return map_selection
 
 
 ########################
-#Loops through the map bases on request type and expands the data using template maps to form a new 'fully expanded' map
+# Loops through the map bases on request type and expands the data using template maps to form a new 'fully expanded' map
 def dict_maker(z01_request_type):
     created_dictionary = {}
     template_dicts = [Standard_Map_Dict, Standard_Map_No_Unique_Dict, Terminal_Diagnostics_Dict,
@@ -1175,7 +1177,9 @@ def dict_maker(z01_request_type):
         created_dictionary.update({key: value})
     # pprint.pprint(created_dictionary, sort_dicts=False)
     return created_dictionary
-#returns a map that can be iterated over to actually parse out the map data
+
+
+# returns a map that can be iterated over to actually parse out the map data
 
 
 ########################
@@ -1183,37 +1187,75 @@ def dict_maker(z01_request_type):
 # Pass map_selection to auto determine which map type to parse
 # Sorts data by Key:Value in specified sub-dictionary from the use_map and cuts out string values by Value in dict
 def request_parser(created_dict):
-    for key, value in created_dict.items():
-        global user_Input_List
-        start_index = 0
-        end_index = 0
-        end_index += value
+    global user_Input_List
+    pprint.pprint(created_dict, sort_dicts=False)
+    print("".join(user_Input_List))
 
+    for x, y in created_dict.items():
+        has_field_separator = ["Account_Number", "AVS_Information", "Client_Discretionary_Data"]
+        card_use_type_values = ["C", "B", "F"]
         try:
-            has_field_separator = ["Account_Number", "AVS_Information", "Client_Discretionary_Data"]
-            if key in has_field_separator:
+            if x in has_field_separator:  # This catches the special dict entries that end in a field sep
                 end_index = user_Input_List.index("=")
-                start_index = user_Input_List.index("=")
-
-            elif key == "Disc_Data_Track2":  # This is variable length up to the 'Card Type'
-                end_index = user_Input_List.index(["F"])  # This needs to be modified to find multiple card types
-                start_index = user_Input_List.index("F")
-
-            elif key == "Tag_Data":  # This is pulled out separately so that the tag data can be further parsed
-                tag_data_parse = "".join(user_Input_List[:user_Input_List.index("=")])
-                print("Tag_Data_Parse: " + tag_data_parse)
-                continue  # Needed or it prints the 'Tag Data' Key from the dictionary as a blank entry
+                print(x + ": " + "".join(user_Input_List[:end_index]))
+                user_Input_List = user_Input_List[end_index:]
+            elif x == "Tag_Data":  # Im not sure why this isn't caught in the above loop if you add to has_field_sep
+                end_index = user_Input_List.index("=")
+                emv_tags = (x + ": " + "".join(user_Input_List[:end_index]))
+                print(x + ": " + emv_tags)
+                user_Input_List = user_Input_List[end_index:]
+            else:
+                if y == 0:  # This is a bit sloppy. The only thing this should find is Disc_Data_Track2 but,
+                    for char in user_Input_List:  # Will find any value of 0 that isn't in the above loop
+                        if char in card_use_type_values:
+                            end_index = (user_Input_List.index(char))
+                            print(x + ": " + "".join(user_Input_List[:end_index]))
+                            user_Input_List = user_Input_List[end_index:]
+                            break  # do not continue to loop through index looking for characters
+                else:  # if not a special dict value
+                    end_index = 0
+                    end_index += y
+                    print(x + ": " + "".join(user_Input_List[:end_index]))
+                    user_Input_List = user_Input_List[end_index:]
         except ValueError:
             pass
 
-        field_data = "".join(user_Input_List[:end_index])
-        start_index += value
-        user_Input_List = user_Input_List[start_index:]
-        print(key + ": " + field_data)
+    # for key, value in created_dict.items():
+    #     print(key,value)
+    #     global user_Input_List
+    #     start_index = 0
+    #     end_index = 0
+    #     if type(value) is int:
+    #         end_index += value
+    #
+    #     try:
+    #         has_field_separator = ["Account_Number", "AVS_Information", "Client_Discretionary_Data"]
+    #         if value in has_field_separator:
+    #             end_index = user_Input_List.index("=")
+    #             start_index = user_Input_List.index("=")
+    #             print("has field sep, index updated")
+    #
+    #         elif value == "Disc_Data_Track2":  # This is variable length up to the 'Card Type'
+    #             end_index = user_Input_List.index(["F"])  # This needs to be modified to find multiple card types
+    #             start_index = user_Input_List.index("F")
+    #             print("debug")
+    #         elif value == "Tag_Data":  # This is pulled out separately so that the tag data can be further parsed
+    #             tag_data_parse = "".join(user_Input_List[:user_Input_List.index("=")])
+    #             print("Tag_Data_Parse: " + tag_data_parse)
+    #             #I want to build this out with a function that looks like
+    #             # tag_parser(tag_data_parse)
+    #             #Function takes input from tag_data_parse and breaks out the tag values
+    #             continue  # Needed or it prints the 'Tag Data' Key from the dictionary as a blank entry
+    #     except ValueError:
+    #         print("valueerror")
+    #
+    #     field_data = "".join(user_Input_List[:end_index])
+    #     if type(value) is int:
+    #         start_index += value
+    #     user_Input_List = user_Input_List[start_index:]
+    #     print(key + ": " + field_data)
 
 
 ####################
-
-
 # MAIN
 request_parser(dict_maker(map_selection_func(user_input_formatting())))
