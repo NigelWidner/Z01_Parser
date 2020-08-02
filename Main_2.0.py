@@ -1192,18 +1192,24 @@ def request_parser(created_dict):
     print("".join(user_Input_List))
 
     for x, y in created_dict.items():
-        has_field_separator = ["Account_Number", "AVS_Information", "Client_Discretionary_Data"]
+        has_field_separator = ["Account_Number", "AVS_Information", ]
         card_use_type_values = ["C", "B", "F"]
         try:
             if x in has_field_separator:  # This catches the special dict entries that end in a field sep
                 end_index = user_Input_List.index("=")
                 print(x + ": " + "".join(user_Input_List[:end_index]))
                 user_Input_List = user_Input_List[end_index:]
-            elif x == "Tag_Data":  # Im not sure why this isn't caught in the above loop if you add to has_field_sep
+            elif x == "Tag_Data":
                 end_index = user_Input_List.index("=")
-                emv_tags = (x + ": " + "".join(user_Input_List[:end_index]))
+                emv_tags = ("".join(user_Input_List[:end_index]))
                 print(x + ": " + emv_tags)
                 user_Input_List = user_Input_List[end_index:]
+            elif x == "Client_Discretionary_Data":
+                end_index = user_Input_List.index("=")
+                discretionary_data = ("".join(user_Input_List[:end_index]))
+                print(x + ": " + discretionary_data)
+                user_Input_List = user_Input_List[end_index:]
+
             else:
                 if y == 0:  # This is a bit sloppy. The only thing this should find is Disc_Data_Track2 but,
                     for char in user_Input_List:  # Will find any value of 0 that isn't in the above loop
