@@ -1,5 +1,6 @@
 import sys
 import pprint
+import argparse
 
 Standard_Map_Dict = {
     # 1001
@@ -1118,9 +1119,9 @@ z01_Request_Field = {
     },
 }
 
-#####################
-
 user_Input_List = []
+
+#####################
 
 
 def user_input_formatting():
@@ -1160,7 +1161,7 @@ def map_selection_func(user_input):
 
 
 ########################
-# Loops through the map bases on request type and expands the data using template maps to form a new 'fully expanded' map
+# Loops through the map based on request type and expands the data using template maps to form a new 'fully expanded' map
 def dict_maker(z01_request_type):
     created_dictionary = {}
     template_dicts = [Standard_Map_Dict, Standard_Map_No_Unique_Dict, Terminal_Diagnostics_Dict,
@@ -1229,5 +1230,4 @@ def request_parser(created_dict):
 
 ####################
 # MAIN
-#user_input_formatting()
 request_parser(dict_maker(map_selection_func(user_input_formatting())))
